@@ -1,0 +1,808 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/BrushedSteel.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Copper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/DamascusSteel.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/HammeredCopper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/SolarCell.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/ReflectiveSurface.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/DryMud.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/RoughPolymer.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/UnevenTerrain.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.030796570616655614 0.013834687767555722 -0.9994299238328956 0.8668665271946687
+  position -12.622086593326182 14.918359262976189 1.9887398549762008
+}
+TexturedBackground {
+  texture "mars"
+}
+TexturedBackgroundLight {
+  luminosity 2
+}
+Robot {
+  translation -9.823015281346601 8.981989286947684 0.20070662939886333
+  rotation 0.0453775681258077 -0.011620160021198256 -0.9989023216471515 1.6177382789074366
+  children [
+    DEF cam_stand Solid {
+      translation -0.3 0 0.4
+      children [
+        DEF solid SliderJoint {
+          jointParameters JointParameters {
+            position 0.04
+            minStop -0.3
+            maxStop 0.3
+            dampingConstant 1
+            staticFriction 3
+          }
+          device [
+            DEF cam_slider LinearMotor {
+              name "cam_slider"
+            }
+          ]
+          endPoint Solid {
+            translation -2.95513e-05 -1.99189e-05 0.03997229999999998
+            rotation -3.0884299999851387e-06 -2.926459999985918e-07 0.9999999999951881 -3.14159
+            children [
+              DEF camera Camera {
+              }
+              DEF box1 Shape {
+                appearance RoughPolymer {
+                  baseColor 1 0.917647 0.0313726
+                }
+                geometry Box {
+                  size 0.05 0.05 0.05
+                }
+              }
+            ]
+          }
+        }
+        DEF cam_stand_shape Shape {
+          appearance Copper {
+          }
+          geometry Cylinder {
+            height 0.6
+            radius 0.02
+          }
+        }
+      ]
+      name "cam_stand"
+      boundingObject USE cam_stand_shape
+      physics Physics {
+      }
+    }
+    DEF ds2 DistanceSensor {
+      translation -0.35 0.15 0
+      rotation 0 0 1 2.68
+      children [
+        Shape {
+          appearance ReflectiveSurface {
+          }
+          geometry Box {
+            size 0.05 0.05 0.05
+          }
+        }
+      ]
+      name "ds2"
+      physics Physics {
+        mass 1
+      }
+      lookupTable [
+        0 0 0
+        1 1000 0
+      ]
+    }
+    DEF ds1 DistanceSensor {
+      translation -0.350387 -0.169997 0
+      rotation 0 0 1 -2.5
+      children [
+        Shape {
+          appearance ReflectiveSurface {
+          }
+          geometry Box {
+            size 0.05 0.05 0.05
+          }
+        }
+      ]
+      name "ds1"
+      physics Physics {
+        mass 1
+      }
+    }
+    DEF body Shape {
+      appearance HammeredCopper {
+      }
+      geometry Box {
+        size 0.7 0.5 0.2
+      }
+    }
+    Solid {
+      translation 0 0 0.19
+      children [
+        DEF panel Shape {
+          appearance SolarCell {
+          }
+          geometry Box {
+            size 0.8 0.5 0.01
+          }
+        }
+        Solid {
+          translation 0.3 -0.19 -0.05
+          children [
+            Shape {
+              appearance Copper {
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+          name "solar_panel_support1"
+        }
+        Solid {
+          translation 0.3 0.19 -0.05
+          children [
+            Shape {
+              appearance Copper {
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+          name "solar_panel_support2"
+        }
+        Solid {
+          translation -0.3 0.19 -0.05
+          children [
+            Shape {
+              appearance Copper {
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+          name "solar_panel_support3"
+        }
+        Solid {
+          translation -0.3 -0.19 -0.05
+          children [
+            Shape {
+              appearance Copper {
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+          name "solar_panel_support4"
+        }
+      ]
+      name "solar_panel"
+    }
+    Solid {
+      translation -0.18 -0.24 0
+      children [
+        SliderJoint {
+          jointParameters JointParameters {
+            position -0.00017447274271497156
+            minStop -0.1
+            staticFriction 1
+          }
+          device [
+            LinearMotor {
+              name "linear1_left"
+              maxForce 50
+            }
+          ]
+          endPoint Solid {
+            translation -0.0012287068990239902 -0.01958652442995712 0.059906519609949735
+            rotation -0.9999999912534955 0.00010801886373614891 -7.632125378699961e-05 1.5709411029394669
+            children [
+              DEF cylinder1 Shape {
+                appearance DamascusSteel {
+                }
+                geometry Cylinder {
+                  height 0.09
+                  radius 0.02
+                }
+              }
+              Solid {
+                translation 0 0 -0.05
+                children [
+                  DEF sphere1 Shape {
+                    appearance BrushedSteel {
+                    }
+                    geometry Sphere {
+                      radius 0.02
+                    }
+                  }
+                  Solid {
+                    translation 0 0.1 1.79608e-07
+                    rotation -1 0 0 -1.5707953071795862
+                    children [
+                      DEF cylinder2 Shape {
+                        appearance BrushedSteel {
+                        }
+                        geometry Cylinder {
+                          height 0.2
+                          radius 0.02
+                        }
+                      }
+                      Solid {
+                        translation 0 0 -0.11
+                        children [
+                          DEF sphere1 Shape {
+                            appearance BrushedSteel {
+                            }
+                            geometry Sphere {
+                              radius 0.02
+                            }
+                          }
+                          Solid {
+                            translation 0 -0.03 -9.99999e-08
+                            rotation 1 0 0 1.5708
+                            children [
+                              DEF cylinder3 Shape {
+                                appearance BrushedSteel {
+                                }
+                                geometry Cylinder {
+                                  height 0.06
+                                  radius 0.02
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  position 2844.5287907570646
+                                  axis 0 0 1
+                                  anchor -9.51224e-05 0.00113507 0.0800056
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel1_left"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.0012474141156908073 0.0010923253002182761 0.08000499999999995
+                                  rotation 7.343204523317728e-07 6.148759905809254e-07 0.9999999999995414 4.529033038801015
+                                  children [
+                                    DEF wheel Shape {
+                                      appearance DamascusSteel {
+                                      }
+                                      geometry Cylinder {
+                                        height 0.15
+                                        radius 0.15
+                                      }
+                                    }
+                                  ]
+                                  boundingObject USE wheel
+                                  physics Physics {
+                                    mass 1
+                                  }
+                                  linearVelocity 0.017237775223807428 0.5001433674658607 0.02490202693137129
+                                  angularVelocity -3.852306074159378 0.14284737947913995 -1.467876336815255
+                                }
+                              }
+                            ]
+                            boundingObject USE cylinder3
+                            physics DEF phy1 Physics {
+                              mass 1
+                            }
+                          }
+                        ]
+                        name "solid(1)"
+                        boundingObject USE sphere1
+                        physics USE phy1
+                      }
+                    ]
+                    boundingObject USE cylinder2
+                    physics USE phy1
+                  }
+                ]
+                boundingObject USE sphere1
+                physics USE phy1
+              }
+            ]
+            boundingObject USE cylinder1
+            physics USE phy1
+            linearVelocity 0.013324983888380243 0.3603847283791257 0.023211813877716026
+            angularVelocity 0.08141163823285637 0.052968124071915576 -1.2029544144516098
+          }
+        }
+      ]
+      name "wheel1_left_system"
+      physics USE phy1
+    }
+    Solid {
+      translation 0.18 -0.24 0
+      children [
+        SliderJoint {
+          jointParameters JointParameters {
+            position -4.3079701057946896e-05
+            minStop -0.1
+            staticFriction 1
+          }
+          device [
+            LinearMotor {
+              name "linear2_left"
+              maxForce 50
+            }
+          ]
+          endPoint Solid {
+            translation 0.0013164286771125688 -0.01921652575291999 0.05999713123191899
+            rotation -0.999999994238402 8.031109491196742e-05 -7.12272689343285e-05 1.570817871629821
+            children [
+              DEF cylinder1 Shape {
+                appearance DamascusSteel {
+                }
+                geometry Cylinder {
+                  height 0.09
+                  radius 0.02
+                }
+              }
+              Solid {
+                translation 0 0 -0.05
+                children [
+                  DEF sphere1 Shape {
+                    appearance BrushedSteel {
+                    }
+                    geometry Sphere {
+                      radius 0.02
+                    }
+                  }
+                  Solid {
+                    translation 0 0.1 1.79608e-07
+                    rotation -1 0 0 -1.5707953071795862
+                    children [
+                      DEF cylinder2 Shape {
+                        appearance BrushedSteel {
+                        }
+                        geometry Cylinder {
+                          height 0.2
+                          radius 0.02
+                        }
+                      }
+                      Solid {
+                        translation 0 0 -0.11
+                        children [
+                          DEF sphere1 Shape {
+                            appearance BrushedSteel {
+                            }
+                            geometry Sphere {
+                              radius 0.02
+                            }
+                          }
+                          Solid {
+                            translation 0 -0.03 -9.99999e-08
+                            rotation 1 0 0 1.5708
+                            children [
+                              DEF cylinder3 Shape {
+                                appearance BrushedSteel {
+                                }
+                                geometry Cylinder {
+                                  height 0.06
+                                  radius 0.02
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  position 2869.785368175756
+                                  axis 0 0 1
+                                  anchor 0.000341778 0.000558794 0.0800055
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel2_left"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.00019516490247648894 0.0007758921678698637 0.08000499999999995
+                                  rotation 7.368846486353327e-07 6.989948101510751e-07 0.9999999999994843 4.652869233128413
+                                  children [
+                                    DEF wheel Shape {
+                                      appearance DamascusSteel {
+                                      }
+                                      geometry Cylinder {
+                                        height 0.15
+                                        radius 0.15
+                                      }
+                                    }
+                                  ]
+                                  boundingObject USE wheel
+                                  physics Physics {
+                                    mass 1
+                                  }
+                                  linearVelocity -0.4220203006481823 0.510522149774469 -0.004285024743546721
+                                  angularVelocity -3.909259425620665 0.1430859874292514 -1.4718290628304176
+                                }
+                              }
+                            ]
+                            boundingObject USE cylinder3
+                            physics DEF phy1 Physics {
+                              mass 1
+                            }
+                          }
+                        ]
+                        name "solid(1)"
+                        boundingObject USE sphere1
+                        physics USE phy1
+                      }
+                    ]
+                    boundingObject USE cylinder2
+                    physics USE phy1
+                  }
+                ]
+                boundingObject USE sphere1
+                physics USE phy1
+              }
+            ]
+            boundingObject USE cylinder1
+            physics USE phy1
+            linearVelocity -0.42442419250675256 0.37105484025626084 -0.008484308128276745
+            angularVelocity 0.0811764726675013 0.0529811082377581 -1.2026980285198694
+          }
+        }
+      ]
+      name "wheel2_left_system"
+      physics USE phy1
+    }
+    Solid {
+      translation 0.18 0.24 0
+      rotation 0 0 1 3.14159
+      children [
+        SliderJoint {
+          jointParameters JointParameters {
+            position -0.0001319178084772793
+            minStop -0.1
+            staticFriction 1
+          }
+          device [
+            LinearMotor {
+              name "linear2_right"
+              maxForce 50
+            }
+          ]
+          endPoint Solid {
+            translation -0.001953601626681234 -0.01960741562747348 0.059947820248357805
+            rotation 0.9999999923703091 -9.886937208646745e-05 7.405557864338643e-05 -1.5709264727256942
+            children [
+              DEF cylinder1 Shape {
+                appearance DamascusSteel {
+                }
+                geometry Cylinder {
+                  height 0.09
+                  radius 0.02
+                }
+              }
+              Solid {
+                translation 0 0 -0.05
+                children [
+                  DEF sphere1 Shape {
+                    appearance BrushedSteel {
+                    }
+                    geometry Sphere {
+                      radius 0.02
+                    }
+                  }
+                  Solid {
+                    translation 0 0.1 1.79608e-07
+                    rotation -1 0 0 -1.5707953071795862
+                    children [
+                      DEF cylinder2 Shape {
+                        appearance BrushedSteel {
+                        }
+                        geometry Cylinder {
+                          height 0.2
+                          radius 0.02
+                        }
+                      }
+                      Solid {
+                        translation 0 0 -0.11
+                        children [
+                          DEF sphere1 Shape {
+                            appearance BrushedSteel {
+                            }
+                            geometry Sphere {
+                              radius 0.02
+                            }
+                          }
+                          Solid {
+                            translation 0 -0.03 -9.99999e-08
+                            rotation 1 0 0 1.5708
+                            children [
+                              DEF cylinder3 Shape {
+                                appearance BrushedSteel {
+                                }
+                                geometry Cylinder {
+                                  height 0.06
+                                  radius 0.02
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  position 1044.0658717251442
+                                  axis 0 0 1
+                                  anchor 0.00034353 0.000611995 0.0800044
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel2_right"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.0007762722029024707 0.00015367298329928595 0.08000499999999995
+                                  rotation -0.5042864003683738 0.8635364650106189 6.873842293724446e-07 3.1415903834161982
+                                  children [
+                                    DEF wheel Shape {
+                                      appearance DamascusSteel {
+                                      }
+                                      geometry Cylinder {
+                                        height 0.15
+                                        radius 0.15
+                                      }
+                                    }
+                                  ]
+                                  boundingObject USE wheel
+                                  physics Physics {
+                                    mass 1
+                                  }
+                                  linearVelocity -0.4474985984014339 -0.5036068606158711 -0.0470849378143276
+                                  angularVelocity 4.028113914707301 -0.033734597765848334 -1.0054681661774632
+                                }
+                              }
+                            ]
+                            boundingObject USE cylinder3
+                            physics DEF phy1 Physics {
+                              mass 1
+                            }
+                          }
+                        ]
+                        name "solid(1)"
+                        boundingObject USE sphere1
+                        physics USE phy1
+                      }
+                    ]
+                    boundingObject USE cylinder2
+                    physics USE phy1
+                  }
+                ]
+                boundingObject USE sphere1
+                physics USE phy1
+              }
+            ]
+            boundingObject USE cylinder1
+            physics USE phy1
+            linearVelocity -0.44359702289536057 -0.36791324946047294 -0.042418749584777336
+            angularVelocity 0.08113571822419052 0.05298202946284237 -1.2030672030139415
+          }
+        }
+      ]
+      name "wheel2_right_system"
+      physics USE phy1
+    }
+    Solid {
+      translation -0.18 0.24 0
+      rotation 0 0 1 3.14159
+      children [
+        SliderJoint {
+          jointParameters JointParameters {
+            position -6.03882680974596e-05
+            minStop -0.1
+            staticFriction 1
+          }
+          device [
+            LinearMotor {
+              name "linear1_right"
+              maxForce 50
+            }
+          ]
+          endPoint Solid {
+            translation 0.0005214042847523359 -0.019218563065065197 0.05998441991862311
+            rotation 0.999999992510473 -9.697689738970707e-05 7.46628122632483e-05 -1.570834539179951
+            children [
+              DEF cylinder1 Shape {
+                appearance DamascusSteel {
+                }
+                geometry Cylinder {
+                  height 0.09
+                  radius 0.02
+                }
+              }
+              Solid {
+                translation 0 0 -0.05
+                children [
+                  DEF sphere1 Shape {
+                    appearance BrushedSteel {
+                    }
+                    geometry Sphere {
+                      radius 0.02
+                    }
+                  }
+                  Solid {
+                    translation 0 0.1 1.79608e-07
+                    rotation -1 0 0 -1.5707953071795862
+                    children [
+                      DEF cylinder2 Shape {
+                        appearance BrushedSteel {
+                        }
+                        geometry Cylinder {
+                          height 0.2
+                          radius 0.02
+                        }
+                      }
+                      Solid {
+                        translation 0 0 -0.11
+                        children [
+                          DEF sphere1 Shape {
+                            appearance BrushedSteel {
+                            }
+                            geometry Sphere {
+                              radius 0.02
+                            }
+                          }
+                          Solid {
+                            translation 0 -0.03 -9.99999e-08
+                            rotation 1 0 0 1.5708
+                            children [
+                              DEF cylinder3 Shape {
+                                appearance BrushedSteel {
+                                }
+                                geometry Cylinder {
+                                  height 0.06
+                                  radius 0.02
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  position 1218.3245870781523
+                                  axis 0 0 1
+                                  anchor 0.00034338 0.000576422 0.0800045
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel1_right"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.0001351308953216681 0.00022043859430582742 0.08000499999999995
+                                  rotation 0.3018957622803274 0.9533409404389659 -3.5806885374756396e-07 3.14159009846048
+                                  children [
+                                    DEF wheel Shape {
+                                      appearance DamascusSteel {
+                                      }
+                                      geometry Cylinder {
+                                        height 0.15
+                                        radius 0.15
+                                      }
+                                    }
+                                  ]
+                                  boundingObject USE wheel
+                                  physics Physics {
+                                    mass 1
+                                  }
+                                  linearVelocity -0.010698969469550963 -0.5126081035728512 -0.021594641783779126
+                                  angularVelocity 4.076065338408243 -0.03411127380037432 -1.0024933237572642
+                                }
+                              }
+                            ]
+                            boundingObject USE cylinder3
+                            physics DEF phy1 Physics {
+                              mass 1
+                            }
+                          }
+                        ]
+                        name "solid(1)"
+                        boundingObject USE sphere1
+                        physics USE phy1
+                      }
+                    ]
+                    boundingObject USE cylinder2
+                    physics USE phy1
+                  }
+                ]
+                boundingObject USE sphere1
+                physics USE phy1
+              }
+            ]
+            boundingObject USE cylinder1
+            physics USE phy1
+            linearVelocity -0.005793009937467428 -0.3779562862528929 -0.013245695357810405
+            angularVelocity 0.08149025417426325 0.052929039390876086 -1.202597317012254
+          }
+        }
+      ]
+      name "wheel1_right_system"
+      physics USE phy1
+    }
+  ]
+  boundingObject USE body
+  physics DEF phy Physics {
+    mass 1
+  }
+  controller "robot_controller"
+  linearVelocity -0.0691191454577643 -0.005281995960903594 -0.0011181924787273655
+  angularVelocity 0.08130592910332932 0.052964866845247656 -1.2028307627869241
+}
+UnevenTerrain {
+  translation 0 0 -2.99
+}
+DEF solid2 Solid {
+  translation 16.653531053844596 15.336856558993789 1.2849207558303182
+  rotation -0.07009729518685538 -0.007707024327948782 0.9975103864038183 0.9291532230262023
+  children [
+    DEF box_shape Shape {
+      appearance DryMud {
+      }
+      geometry Box {
+        size 0.8 1.7 2
+      }
+    }
+  ]
+  name "solid2"
+  boundingObject USE box_shape
+  physics USE phy1
+  linearVelocity -7.110884113332688e-07 1.298868253717427e-06 -5.97175462701252e-07
+  angularVelocity -4.4605647987582076e-08 -5.045828217187754e-08 -1.5172960095201707e-07
+}
+DEF solid3 Solid {
+  translation 9.233635840670342 3.7409062043928603 1.6298422982648673
+  rotation 0.5094754322727597 0.5944155883315818 0.622177540786313 2.225876327828707
+  children [
+    DEF box_shape Shape {
+      appearance DryMud {
+      }
+      geometry Box {
+        size 1.8 1.8 1.8
+      }
+    }
+  ]
+  name "solid3"
+  boundingObject USE box_shape
+  physics USE phy1
+  linearVelocity -4.474519884078557e-07 -1.4563154729845125e-06 -7.773312636912353e-07
+  angularVelocity 3.475468565315694e-07 -1.5563816217685284e-07 2.0840858098987588e-07
+}
+DEF solid4 Solid {
+  translation 13.695225355175102 8.121474990114857 1.6363404029972073
+  rotation 0.4827901007700821 0.6354450774003171 0.6025971060386194 2.2064995043476667
+  children [
+    DEF sphere_shape Shape {
+      appearance DryMud {
+      }
+      geometry Sphere {
+      }
+    }
+  ]
+  name "solid4"
+  boundingObject USE box_shape
+  physics USE phy1
+  linearVelocity 9.106008856054435e-07 1.883995027714485e-06 -9.702998610239908e-07
+  angularVelocity 2.566208703973102e-07 5.674977252141424e-07 1.0318487190719224e-06
+}
+DEF solid1 Solid {
+  translation 3.0217780773514464 6.487000799406003 1.4440817896778693
+  rotation 0.2808728082448956 0.6809375471634965 0.6763390587949116 2.549374134792719
+  children [
+    DEF box_shape Shape {
+      appearance DryMud {
+      }
+      geometry Box {
+        size 0.8 1.7 2
+      }
+    }
+  ]
+  name "solid1"
+  boundingObject USE box_shape
+  physics USE phy1
+  linearVelocity -3.1484027239213614e-07 -5.79635655498762e-07 -9.559693531853998e-07
+  angularVelocity 1.031449793332917e-06 3.7449757134747436e-07 4.0603376705867e-07
+}
